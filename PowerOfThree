@@ -1,0 +1,36 @@
+// https://leetcode.com/problems/power-of-three/
+
+class Solution {
+    public boolean isPowerOfThree(int n) {
+  
+        if(n == 0)
+            return false;
+        if(n == 1)
+            return true;
+        
+        int val = n;
+        int mod = 0;
+        
+        while(mod == 0){
+            
+            mod = val % 3;
+            val = val/3;
+            if(val == 1 && mod == 0)
+                return true;
+        }
+        
+        return false;
+       
+    }
+}
+
+class Solution {
+    public boolean isPowerOfThree(int n) {
+        
+        if(n < 0)
+            return false;
+        
+        return Math.pow(3, 19) % n == 0;
+        
+     }   
+}
