@@ -1,0 +1,85 @@
+// Best Time to Buy and Sell Stock
+
+// Method 1. Brute Solution
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        if(prices.length <= 1)
+            return 0;
+        
+        int maxProfit = Integer.MIN_VALUE;
+        
+        for(int i=0; i<prices.length-1; i++){
+            for(int j=i+1; j<prices.length; j++){
+                
+                if(prices[i] < prices[j]){
+                    int diff = prices[j] - prices[i];
+                    if(diff > maxProfit)
+                        maxProfit = diff;
+                }
+            }
+        }
+        
+        if(maxProfit < 0)
+            return 0;
+        
+        return maxProfit;
+    }
+}
+// Method 2
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        if(prices.length <= 1)
+            return 0;
+        
+        int maxProfit = Integer.MIN_VALUE;
+        int minValue = prices[0];
+        
+        for(int i=1; i<prices.length; i++){
+            
+            if(minValue < prices[i]){
+                
+                int diff = prices[i] - minValue;
+                
+                if(diff > maxProfit)
+                    maxProfit = diff;
+            }else{
+                
+                minValue = prices[i];
+            }
+                
+        }
+        
+        if(maxProfit < 0)
+            return 0;
+        
+        return maxProfit;
+    }
+}
+
+// Method 3. Dynamic Programming
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+        if(prices.length <= 1)
+            return 0;
+        
+        int maxProfit = 0;
+        int [] diff = new int[prices.length];
+        int [] profit = new int[prices.length];
+        
+        Arrays.fill(diff, 0);
+        Arrays.fill(profit, 0);
+        for(int i=1; i<prices.length; i++){
+        
+            diff[i] = prices[i] - prices[i-1];
+            profit[i] = Math.max(0, profit[i-1]+diff[i]);
+            
+            if(profit[i] > maxProfit)
+                maxProfit = profit[i];
+        }
+        
+        return maxProfit;
+    }
+}
