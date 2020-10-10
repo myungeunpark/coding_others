@@ -1,0 +1,34 @@
+// https://leetcode.com/problems/combination-sum-ii/
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+       
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        Arrays.sort(candidates);
+        dfs(candidates, target, 0, list, result);
+        return result;
+        
+    }
+    
+    private void dfs(int [] candi, int target, int start, List<Integer> list, List<List<Integer>> ret)     {
+        
+        for(int i=start; i<candi.length; i++){
+            
+            if(i > start && candi[i] == candi[i-1]) continue;
+            if(candi[i] == target){
+                
+                List<Integer> temp = new ArrayList<>(list);
+                temp.add(target);
+                ret.add(temp);
+                return;
+         
+            }else if(candi[i] < target){
+             
+                list.add(candi[i]);
+                dfs(candi, target - candi[i], i+1, list, ret);
+                list.remove(list.size()-1);
+            }
+        }
+    }
+}
