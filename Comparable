@@ -1,0 +1,37 @@
+// Comparable 
+// compare two class objects with specific data field value 
+// implements Comparable class
+public class Meat implements Comparable<Meat>{
+		
+		String  name;
+		Integer kind;
+		Integer weight;
+		
+		public Meat(String name, Integer kind, Integer weight) {
+			
+			this.name = name;
+			this.kind = kind;
+			this.weight = weight;
+		}
+		
+		@Override
+		public int compareTo(Meat meat) {			
+			return this.name.compareTo(meat.name);
+		}		
+	}
+	
+	public void Test() {
+		
+		List<Meat> list = new ArrayList<>();
+		list.add(new Meat("pork", 1, 356));
+		list.add(new Meat("chicken", 2, 523));
+		list.add(new Meat("cow", 5, 156));
+		list.add(new Meat("duck", 9, 932));
+		
+		Collections.sort(list);
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).name + " / " + list.get(i).kind +" / " + list.get(i).weight); 
+		}
+	}
+}
