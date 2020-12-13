@@ -1,0 +1,54 @@
+// compare with Comparator
+
+	public class Bird{
+		
+		String name;
+		int num;
+		int kind;
+		
+		public Bird(String name, int num, int kind) {
+			
+			this.name = name;
+			this.num = num;
+			this.kind = kind;
+		}
+	}
+	
+	Comparator<Bird> comparatorNum = new Comparator<Bird>() {
+		
+		@Override
+		public int compare(Bird bird1, Bird bird2) {
+			return bird1.num - bird2.num;
+		}
+		
+	};
+	
+	Comparator<Bird> comparatorKind = new Comparator<Bird>() {
+		
+		@Override
+		public int compare(Bird bird1, Bird bird2) {
+			return bird1.kind - bird2.kind;
+		}
+		
+	};
+	
+	void Test() {
+		
+		List<Bird> list = new ArrayList<>();
+		list.add(new Bird("Bird1", 250, 3));
+		list.add(new Bird("Bird2", 620, 2));
+		list.add(new Bird("Bird3", 340, 1));
+		list.add(new Bird("Bird4", 120, 5));
+		list.add(new Bird("Bird5", 720, 4));
+		
+		Collections.sort(list, comparatorNum);		
+		System.out.println("Compare with Number Comarator");
+		for(int i=0; i<list.size(); i++) 			
+			System.out.println(list.get(i).name + " / " + list.get(i).num + " / " + list.get(i).kind); 
+		
+		Collections.sort(list, comparatorKind);	
+		System.out.println("Compare with Kind Comarator");
+		for(int i=0; i<list.size(); i++) 			
+			System.out.println(list.get(i).name + " / " + list.get(i).num + " / " + list.get(i).kind); 
+	
+	}
