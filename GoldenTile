@@ -1,0 +1,57 @@
+class Tile{
+
+	private int	id;
+	private boolean	isGoldenTile;
+	private List<Tile> neighbors;	
+
+	public Tile(int id){
+		this.id = id;
+		this.isGoldenTile = false;
+		this.neighbors = new ArrayList<>();
+	}
+
+	public Tile(int id, List<Tile> list){
+		this.id = id;
+		this.isGoldenTile = false;
+		this.neighbors = list;
+	}
+
+	public boolean isGoldenTile(){
+		return this.isGoldenTile;
+	}
+
+	public List<Tile> getNeighbors(){
+		return this.neighbors;
+	}
+
+	public static void connect(Tile a, Tile b){
+		a.neighbors.add(b);
+		b.neighbors.add(a);
+	}
+
+	public Tile findGoldenTile(){
+		
+		HashSet<Tile> set = new HashSet<>();
+		if(isGoldenTile)
+			return this;
+		else
+			return findGoldenTile(set);	
+	}
+
+	public Tile findGoldenTile(HashSet<Tile> set){
+
+		set.add(this);
+		if(isGoldenTile)
+			return this;
+		for(Tile t : neighbors){
+			
+			if(set.continas(t)
+				continue;
+			Tile ret = t.findGoldenTile(set);
+			if(ret != null)
+				return ret;
+		}
+
+		return null;
+	}
+}
